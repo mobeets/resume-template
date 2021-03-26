@@ -91,6 +91,30 @@
         {% endfor %}
       </section>
       {% endif %}
+      
+      {% if site.resume_section_papers %}
+      <section class="content-section">
+        <header class="section-header">
+          <h2>Projects</h2>
+        </header>
+        <div class="resume-item">
+          <ul class="resume-item-list">
+            {% for paper in site.data.papers %}
+            <li><a href="{{ paper.url }}">"{{ paper.title }}"</a> {{ paper.authors }} <i>{{ paper.journal }}</i> {{ paper.volume }} ({{ paper.year }})</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </section>
+      {% endif %}
+      
+      
+<!--   title: "Mortality among United States aerospace materials manufacturing workers"
+  authors: "Marsh, G. M., Buchanich, J. M., <b>Graves, J.</b>, Zimmerman, S., & Liu, Y."
+  journal: "American Journal of Industrial Medicine" 
+  year: 2019
+  volume: "62(3), 192-204"
+  url: "https://onlinelibrary.wiley.com/doi/abs/10.1002/ajim.22943"
+ -->
 
 
 <!--       {% if site.resume_section_projects %}

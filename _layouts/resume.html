@@ -13,7 +13,7 @@
 
         <!-- You can turn off the avatar in _config.yml by setting to false -->
         {% if site.resume_avatar == 'true' %}
-        <img src="images/avatar.jpg" alt="my photo" class="avatar no-print" itemprop="image">
+        <img src="images/avatar.png" alt="my photo" class="avatar no-print" itemprop="image">
         {% endif %}
 
         <!-- Your name is defined in the _config.yml file -->
@@ -40,10 +40,21 @@
         </div>
 
         {% if site.resume_looking_for_work == 'yes' %}
-        <a href="mailto:{{ site.resume_contact_email }}" class="contact-button no-print" itemprop="email">Contact me</a>
+        <div class="contact-buttons">
+        <a href="mailto:{{ site.resume_contact_email }}" class="contact-button no-print" itemprop="email"><img src="/images/email.png" width="20px;">&nbsp; Email</a>
+        <a href="images/cv.pdf" class="contact-button no-print"><img src="/images/cv.png" width="12px;">&nbsp; CV</a>
+        </div>
         {% elsif site.resume_looking_for_work == 'no' %}
         <a class="contact-button not-looking no-print">I'm not looking for work right now.</a>
         {% else %}
+        {% endif %}
+
+        {% if site.resume_section_interests %}
+        <div class="resume-item">
+          {% for interest in site.data.interests %}
+          <span class="interest-button">{{ interest.description }}</span>
+          {% endfor %} 
+        </div>
         {% endif %}
 
       </header>
@@ -98,9 +109,17 @@
           <h2>Academic Publications</h2>
         </header>
         <div class="resume-item">
+          {% if site.resume_social_links.resume_scholar_url %}
+            See my <a href="{{  site.resume_social_links.resume_scholar_url }}">Google Scholar</a> profile for an up-to-date listing of my publications.
+          {% endif %}
           <ul class="resume-item-list">
             {% for paper in site.data.papers %}
-            <li><a href="{{ paper.url }}">"{{ paper.title }}"</a><br>{{ paper.authors }}<br><i>{{ paper.journal }}</i> {{ paper.volume }} ({{ paper.year }})<br></li>
+            <li>
+              <a href="{{ paper.url }}">"{{ paper.title }}"</a><br>
+              <span style="font-size:smaller;">
+                <span style="color: gray;">{{ paper.authors }}</span>
+                <br><i>{{ paper.journal }}</i> {{ paper.volume }} ({{ paper.year }})</span>
+            </li><br>
             {% endfor %}
           </ul>
         </div>
@@ -173,24 +192,6 @@
           <p class="resume-item-copy">{{ association.summary }}</p>
         </div>
         {% endfor %}
-
-      </section>
-      {% endif %}
-
-      {% if site.resume_section_interests %}
-      <section class="content-section">
-
-        <header class="section-header">
-          <h2>Outside Interests</h2>
-        </header>
-
-        <div class="resume-item">
-          <ul class="resume-item-list">
-            {% for interest in site.data.interests %}
-            <li>{{ interest.description }}</li>
-            {% endfor %}
-          </ul>
-        </div>
 
       </section>
       {% endif %}
